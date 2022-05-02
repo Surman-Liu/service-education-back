@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.StudentDao">
+    <!--    根据用户手机号查询用户-->
+    <select id="findByUserPhone" parameterType="String" resultType="Student">
+        select id,username,realname,password,job,phone,introduce,words,touxiang from `student`
+        where phone = #{phone}
+    </select>
+
+    <!--    注册用户-->
+    <insert id="save" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student(id,username,realname,password,phone) values(#{id},#{username},#{realname},#{password},#{phone})
+    </insert>
+
+    <!--    用户更改密码-->
+    <update id="updatePassword">
+        update `student` set password = #{newPassword}
+        where phone = #{phone}
+    </update>
+
+    <!--    用户编辑个人信息-->
+    <update id="editInfo">
+        update `student` set touxiang = #{touxiang},username = #{username},words = #{words},introduce = #{introduce}
+        where phone = #{phone}
+    </update>
+</mapper>

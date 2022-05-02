@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
+    freemarker:
+      cache: false
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/space?characterEncoding=UTF-8
+    username: root
+    password: root
+
+mybatis:
+  mapper-locations: classpath:com/example/demo/mapper/*.xml
+  type-aliases-package: com.example.demo.entity
+
+sms:
+  verific:
+    apiurl: https://sms_developer.zhenzikj.com
+    appid: 107626
+    appsecret: ce3b86dc-f97e-41a5-babc-c8850aa69736
+
