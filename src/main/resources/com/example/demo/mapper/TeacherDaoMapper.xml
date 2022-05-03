@@ -21,7 +21,7 @@
 
     <!--    用户编辑个人信息-->
     <update id="editInfo">
-        update `student` set touxiang = #{touxiang},username = #{username},words = #{words},introduce = #{introduce}
+        update `teacher` set touxiang = #{touxiang},username = #{username},words = #{words},introduce = #{introduce}
         where phone = #{phone}
     </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
 
@@ -31,4 +32,9 @@ public interface StudentService {
     * 用户编辑个人信息
     * */
     Student editInfo(JSONObject jsonObject);
+
+    /*
+    * 学生选择的某种类型的课程
+    * */
+    PageResult selectedClass(JSONObject jsonObject);
 }

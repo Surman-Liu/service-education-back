@@ -24,4 +24,6 @@
         update `student` set touxiang = #{touxiang},username = #{username},words = #{words},introduce = #{introduce}
         where phone = #{phone}
     </update>
+
+    
 </mapper>

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 public class Student {
     private Integer id;
     private String realname;
@@ -13,6 +15,7 @@ public class Student {
     private String words;
     private String password;
     private Integer job;
+    private List<Class> classList;
 
     public Student(){
 
@@ -25,7 +28,7 @@ public class Student {
         this.phone = phone;
     }
 
-    public Student(Integer id, String realname, String username, String phone, String classes, String exp, String exam, String touxiang, String introduce, String words, String password, Integer job) {
+    public Student(Integer id, String realname, String username, String phone, String classes, String exp, String exam, String touxiang, String introduce, String words, String password, Integer job,List<Class> classList) {
         this.id = id;
         this.realname = realname;
         this.username = username;
@@ -38,6 +41,7 @@ public class Student {
         this.words = words;
         this.password = password;
         this.job = job;
+        this.classList = classList;
     }
 
     public Integer getId() {
@@ -134,5 +138,13 @@ public class Student {
 
     public void setJob(Integer job) {
         this.job = job;
+    }
+
+    public List<Class> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<Class> classList) {
+        this.classList = classList;
     }
 }

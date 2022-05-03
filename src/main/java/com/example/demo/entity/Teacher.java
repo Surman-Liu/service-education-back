@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 public class Teacher {
     private Integer id;
     private String realname;
@@ -15,6 +17,7 @@ public class Teacher {
     private String words;
     private String password;
     private Integer job;
+    private List<Class> classList;
 
     public Teacher(){
 
@@ -155,5 +158,13 @@ public class Teacher {
 
     public void setJob(Integer job) {
         this.job = job;
+    }
+
+    public List<Class> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<Class> classList) {
+        this.classList = classList;
     }
 }

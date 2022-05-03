@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.entity.Class;
+import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Service
 @Transactional
@@ -139,5 +142,19 @@ public class StudentServiceImpl implements StudentService{
 
         // 注册
         studentDao.save(student);
+    }
+
+    @Override
+    public PageResult selectedClass(JSONObject jsonObject) {
+        Integer student_id = jsonObject.getInteger("student_id");
+        Integer class_type = jsonObject.getInteger("class_type");
+        Integer page = jsonObject.getInteger("page");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        Integer pageNum = (page - 1) * pageSize;
+        List<Class> classList =  studentDao.selectedClass(student_id,class_type,pageNum,pageSize);
+        Integer total = studentDao.total(student_id,class_type);
+
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,classList);
+        return pageResult;
     }
 }

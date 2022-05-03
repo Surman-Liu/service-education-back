@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.User;
 import com.example.demo.global.Response;
@@ -92,6 +93,20 @@ public class StudentController {
         try {
             studentService.register(jsonObject,httpSession);
             return Response.success("注册成功，欢迎登陆！");
+        }catch(RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+    * 学生选择的某个类型的课程
+    * */
+    @ResponseBody
+    @RequestMapping("/selectedClass")
+    public Response selectedClass(@RequestBody JSONObject jsonObject){
+        try {
+            PageResult pageResult = studentService.selectedClass(jsonObject);
+            return Response.success(pageResult,"成功");
         }catch(RuntimeException e){
             return Response.error(e.getMessage());
         }

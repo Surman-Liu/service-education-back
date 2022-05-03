@@ -1,6 +1,9 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.Class;
 import com.example.demo.entity.Student;
+
+import java.util.List;
 
 public interface StudentDao {
     //    通过手机号查找用户
@@ -14,4 +17,10 @@ public interface StudentDao {
 
     // 用户修改个人信息
     void editInfo(String touxiang, String username, String words, String introduce, String phone);
+
+    //学生选择的某一类课程
+    List<Class> selectedClass(Integer student_id, Integer class_type, Integer pageNum, Integer pageSize);
+
+    //学生选择的某一类课程的总数
+    Integer total(Integer student_id, Integer class_type);
 }

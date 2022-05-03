@@ -6,4 +6,46 @@
     <insert id="add" parameterType="Class" useGeneratedKeys="true" keyProperty="id">
         insert into `class` values(#{id},#{class_name},#{teacher_id},#{teacher_name},#{create_time},#{description},#{money},#{poster},#{class_type},#{status})
     </insert>
+
+    <!--    计算符合条件的课程总数-->
+    <select id="total" resultType="Integer">
+    select count(1) from `class`
+    where teacher_id = #{teacher_id} and class_type = #{class_type}
+    </select>
+
+    <!--    选择符合条件的课程 加上分页-->
+    <select id="search" resultType="Class">
+        select * from class
+        where teacher_id = #{teacher_id} and class_type = #{class_type}
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <!--    删除课程-->
+    <delete id="delete" parameterType="Integer" >
+     delete from class where id=#{id}
+    </delete>
+
+    <!--   根据id选择课程 -->
+    <select id="selectById" parameterType="Integer" resultType="Class">
+        select * from class
+        where id = #{id}
+    </select>
+
+<!--    根据id更新课程信息-->
+    <update id="update">
+        update class set class_name = #{name},class_type = #{type},money = #{money},description = #{desc},poster = #{poster},status = #{status}
+        where id = #{id}
+    </update>
+
+<!--    获取某个老师已发布的课程数-->
+    <select id="classNum" resultType="Integer">
+        select count(1) from class
+        where teacher_id = #{teacher_id} and class_type = #{class_type} and status = #{status}
+    </select>
+
+<!--    获取某个老师发布的某种课程总数-->
+    <select id="typeCount" resultType="Integer">
+        select count(1) from class
+        where teacher_id = #{teacher_id} and class_type = #{class_type}
+    </select>
 </mapper>
