@@ -25,5 +25,35 @@
         where phone = #{phone}
     </update>
 
-    
+    <!--学生选择的某一类型课程-->
+    <resultMap id="classList" type="Class">
+        <id column="id" property="id"/>
+        <result column="class_name" property="class_name"/>
+        <result column="teacher_id" property="teacher_id"/>
+        <result column="teacher_name" property="teacher_name"/>
+        <result column="create_time" property="create_time"/>
+        <result column="create_time" property="create_time"/>
+        <result column="description" property="description"/>
+        <result column="money" property="money"/>
+        <result column="poster" property="poster"/>
+        <result column="class_type" property="class_type"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <select id="selectedClass" resultMap="classList">
+        select * from `select` left join class on select.class_id = class.id
+        where `select`.student_id = #{student_id} and class.class_type = #{class_type}
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <!--学生选择的某一类课程的总数-->
+    <select id="total" resultType="Integer">
+        select count(1) from `select` left join class on select.class_id = class.id
+        where `select`.student_id = #{student_id} and class.class_type = #{class_type}
+    </select>
+
+    <!--    获取某个老师发布的某种课程总数-->
+    <select id="typeCount" resultType="Integer">
+        select count(1) from `select` left join class on select.class_id = class.id
+        where student_id = #{student_id} and class_type = #{class_type}
+    </select>
 </mapper>

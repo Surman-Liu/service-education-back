@@ -3,10 +3,8 @@ package com.example.demo.service;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.entity.*;
 import com.example.demo.entity.Class;
-import com.example.demo.entity.PageResult;
-import com.example.demo.entity.Student;
-import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -156,5 +154,15 @@ public class StudentServiceImpl implements StudentService{
 
         PageResult pageResult = new PageResult(pageNum,pageSize,total,classList);
         return pageResult;
+    }
+
+    @Override
+    public TypeNum typeCount(Integer student_id) {
+        Integer classes = studentDao.typeCount(student_id,1);
+        Integer exam = studentDao.typeCount(student_id,2);
+        Integer trail = studentDao.typeCount(student_id,3);
+
+        TypeNum typeNum = new TypeNum(classes,exam,trail);
+        return typeNum;
     }
 }

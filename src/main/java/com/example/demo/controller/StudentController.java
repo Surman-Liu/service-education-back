@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.TypeNum;
 import com.example.demo.entity.User;
 import com.example.demo.global.Response;
 import com.example.demo.service.StudentService;
@@ -108,6 +109,20 @@ public class StudentController {
             PageResult pageResult = studentService.selectedClass(jsonObject);
             return Response.success(pageResult,"成功");
         }catch(RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 学生选择的不同类型的课程数量
+     * */
+    @ResponseBody
+    @RequestMapping("/typeCount")
+    public Response typeCount(Integer student_id){
+        try{
+            TypeNum typeNum = studentService.typeCount(student_id);
+            return Response.success(typeNum,"成功");
+        }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }
     }

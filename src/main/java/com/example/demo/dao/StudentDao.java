@@ -23,4 +23,7 @@ public interface StudentDao {
 
     //学生选择的某一类课程的总数
     Integer total(Integer student_id, Integer class_type);
+
+    //学生选择的不同类型的课程数量
+    Integer typeCount(Integer student_id, Integer class_type);
 }
