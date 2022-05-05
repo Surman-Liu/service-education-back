@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
 import com.example.demo.entity.User;
@@ -94,6 +95,34 @@ public class TeacherController {
             teacherService.register(jsonObject,httpSession);
             return Response.success("注册成功，欢迎登陆！");
         }catch(RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 获取所有老师数据
+     * */
+    @ResponseBody
+    @RequestMapping("/teacher-all")
+    public Response searchStudent(Integer page,Integer pageSize){
+        try{
+            PageResult pageResult = teacherService.teacherAll(page,pageSize);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 关键字搜索学生
+     * */
+    @ResponseBody
+    @RequestMapping("/search")
+    public Response searchTeacher(@RequestBody JSONObject jsonObject){
+        try{
+            PageResult pageResult = teacherService.search(jsonObject);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }
     }

@@ -26,4 +26,12 @@ public interface StudentDao {
 
     //学生选择的不同类型的课程数量
     Integer typeCount(Integer student_id, Integer class_type);
+
+    List<Student> studentAll(Integer pageNum, Integer pageSize);
+
+    Integer studentAllCount();
+
+    List<Student> search(String input, Integer pageNum, Integer pageSize);
+
+    Integer searchCount(String input);
 }

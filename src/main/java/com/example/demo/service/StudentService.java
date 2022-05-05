@@ -43,4 +43,11 @@ public interface StudentService {
     * 学生选择的不同类型的课程数量
     * */
     TypeNum typeCount(Integer student_id);
+
+    /*
+    * 获取所有学生信息
+    * */
+    PageResult studentAll(Integer page, Integer pageSize);
+
+    PageResult search(JSONObject jsonObject);
 }

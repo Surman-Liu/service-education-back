@@ -56,4 +56,24 @@
         select count(1) from `select` left join class on select.class_id = class.id
         where student_id = #{student_id} and class_type = #{class_type}
     </select>
+
+    <select id="studentAll" resultType="Student">
+        select * from student
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="studentAllCount" resultType="Integer">
+        select count(1) from student
+    </select>
+
+    <select id="search" resultType="Student">
+        select * from student
+        where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%')
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="searchCount" resultType="Integer">
+        select count(1) from student
+        where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%')
+    </select>
 </mapper>

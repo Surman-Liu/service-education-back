@@ -24,4 +24,24 @@
         update `teacher` set touxiang = #{touxiang},username = #{username},words = #{words},introduce = #{introduce}
         where phone = #{phone}
     </update>
+
+    <select id="teacherAll" resultType="Teacher">
+        select * from teacher
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="teacherAllCount" resultType="Integer">
+        select count(1) from teacher
+    </select>
+
+    <select id="search" resultType="Teacher">
+        select * from teacher
+        where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%') or idcard like concat('%',#{input},'%')
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="searchCount" resultType="Integer">
+        select count(1) from teacher
+        where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%') or idcard like concat('%',#{input},'%')
+    </select>
 </mapper>

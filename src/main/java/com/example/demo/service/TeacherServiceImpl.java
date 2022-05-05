@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.dao.TeacherDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
 import com.example.demo.entity.User;
@@ -15,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Service
 @Transactional
@@ -140,5 +142,27 @@ public class TeacherServiceImpl implements TeacherService{
 
         // 注册
         teacherDao.save(teacher);
+    }
+
+    @Override
+    public PageResult teacherAll(Integer page, Integer pageSize) {
+        Integer pageNum = (page - 1) * pageSize;
+        List<Teacher> teacherList =  teacherDao.teacherAll(pageNum,pageSize);
+        Integer total = teacherDao.teacherAllCount();
+
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,teacherList);
+        return pageResult;
+    }
+
+    @Override
+    public PageResult search(JSONObject jsonObject) {
+        String input = jsonObject.getString("input");
+        Integer page = jsonObject.getInteger("page");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        Integer pageNum = (page - 1) * pageSize;
+        List<Teacher> teacherList =  teacherDao.search(input,pageNum,pageSize);
+        Integer total = teacherDao.searchCount(input);
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,teacherList);
+        return pageResult;
     }
 }

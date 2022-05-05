@@ -126,4 +126,32 @@ public class StudentController {
             return Response.error(e.getMessage());
         }
     }
+
+    /*
+     * 获取所有学生数据
+     * */
+    @ResponseBody
+    @RequestMapping("/student-all")
+    public Response studentAll(Integer page,Integer pageSize){
+        try{
+            PageResult pageResult = studentService.studentAll(page,pageSize);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 关键字搜索学生
+     * */
+    @ResponseBody
+    @RequestMapping("/search")
+    public Response searchStudent(@RequestBody JSONObject jsonObject){
+        try{
+            PageResult pageResult = studentService.search(jsonObject);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
 }

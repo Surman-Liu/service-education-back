@@ -165,4 +165,26 @@ public class StudentServiceImpl implements StudentService{
         TypeNum typeNum = new TypeNum(classes,exam,trail);
         return typeNum;
     }
+
+    @Override
+    public PageResult studentAll(Integer page, Integer pageSize) {
+        Integer pageNum = (page - 1) * pageSize;
+        List<Student> studentList =  studentDao.studentAll(pageNum,pageSize);
+        Integer total = studentDao.studentAllCount();
+
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,studentList);
+        return pageResult;
+    }
+
+    @Override
+    public PageResult search(JSONObject jsonObject) {
+        String input = jsonObject.getString("input");
+        Integer page = jsonObject.getInteger("page");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        Integer pageNum = (page - 1) * pageSize;
+        List<Student> studentList =  studentDao.search(input,pageNum,pageSize);
+        Integer total = studentDao.searchCount(input);
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,studentList);
+        return pageResult;
+    }
 }

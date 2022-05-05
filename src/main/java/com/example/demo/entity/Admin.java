@@ -2,7 +2,7 @@ package com.example.demo.entity;
 
 public class Admin {
     private Integer id;
-    private String name;
+    private String username;
     private String phone;
     private String password;
     private String touxiang;
@@ -10,9 +10,9 @@ public class Admin {
 
     public Admin(){}
 
-    public Admin(Integer id, String name, String phone, String password, String touxiang, Integer job) {
+    public Admin(Integer id, String username, String phone, String password, String touxiang, Integer job) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.phone = phone;
         this.password = password;
         this.touxiang = touxiang;
@@ -27,12 +27,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPhone() {
