@@ -119,4 +119,46 @@ public class ClassController {
             return Response.error(e.getMessage());
         }
     }
+
+    /*
+     * 查询管理员管理待审核的课程列表
+     * */
+    @ResponseBody
+    @RequestMapping("/class-manage")
+    public Response classManage(@RequestBody JSONObject jsonObject){
+        try{
+            PageResult pageResult = classService.classManage(jsonObject);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 查询管理员管理的已审核课程列表
+     * */
+    @ResponseBody
+    @RequestMapping("/class-audited")
+    public Response classAudited(@RequestBody JSONObject jsonObject){
+        try{
+            PageResult pageResult = classService.classAudited(jsonObject);
+            return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 更改课程状态
+     * */
+    @ResponseBody
+    @RequestMapping("/change-status")
+    public Response changeStatus(Integer id,Integer status){
+        try{
+            classService.changeStatus(id,status);
+            return Response.success("操作成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
 }

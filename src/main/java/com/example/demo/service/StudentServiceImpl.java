@@ -187,4 +187,9 @@ public class StudentServiceImpl implements StudentService{
         PageResult pageResult = new PageResult(pageNum,pageSize,total,studentList);
         return pageResult;
     }
+
+    @Override
+    public void delete(Integer id) {
+        studentDao.delete(id);
+    }
 }

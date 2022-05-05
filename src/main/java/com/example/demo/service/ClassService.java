@@ -44,4 +44,10 @@ public interface ClassService {
     * 查看不同类型的课程数量
     * */
     TypeNum typeCount(Integer teacher_id);
+
+    PageResult classManage(JSONObject jsonObject);
+
+    void changeStatus(Integer id, Integer status);
+
+    PageResult classAudited(JSONObject jsonObject);
 }

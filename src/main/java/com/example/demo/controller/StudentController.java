@@ -154,4 +154,18 @@ public class StudentController {
             return Response.error(e.getMessage());
         }
     }
+
+    /*
+     * 删除学生
+     * */
+    @ResponseBody
+    @RequestMapping("/delete")
+    public Response delete(Integer id){
+        try{
+            studentService.delete(id);
+            return Response.success("删除成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
 }

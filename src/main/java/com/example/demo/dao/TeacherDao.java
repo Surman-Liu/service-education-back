@@ -25,4 +25,6 @@ public interface TeacherDao {
     List<Teacher> search(String input, Integer pageNum, Integer pageSize);
 
     Integer searchCount(String input);
+
+    void delete(Integer id);
 }

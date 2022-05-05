@@ -22,4 +22,13 @@ public interface ClassDao {
 
     Integer typeCount(Integer teacher_id,Integer class_type);
 
+    List<Class> classManage(Integer pageNum, Integer pageSize, String input, Integer status, Integer class_type);
+
+    Integer classManageCount(String input, Integer status, Integer class_type);
+
+    void changeStatus(Integer id, Integer status);
+
+    List<Class> classAudited(Integer pageNum, Integer pageSize, String input, Integer status, Integer class_type);
+
+    Integer classAuditedCount(String input, Integer status, Integer class_type);
 }

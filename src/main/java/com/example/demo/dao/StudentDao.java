@@ -34,4 +34,6 @@ public interface StudentDao {
     List<Student> search(String input, Integer pageNum, Integer pageSize);
 
     Integer searchCount(String input);
+
+    void delete(Integer id);
 }

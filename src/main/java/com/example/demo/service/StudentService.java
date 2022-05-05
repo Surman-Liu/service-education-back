@@ -50,4 +50,6 @@ public interface StudentService {
     PageResult studentAll(Integer page, Integer pageSize);
 
     PageResult search(JSONObject jsonObject);
+
+    void delete(Integer id);
 }

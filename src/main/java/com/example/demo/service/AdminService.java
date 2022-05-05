@@ -16,4 +16,7 @@ public interface AdminService {
     PageResult adminAll(Integer page, Integer pageSize);
 
     PageResult search(JSONObject jsonObject);
+
+    void delete(Integer id);
+
 }

@@ -33,4 +33,6 @@ public interface TeacherService {
     PageResult teacherAll(Integer page, Integer pageSize);
 
     PageResult search(JSONObject jsonObject);
+
+    void delete(Integer id);
 }

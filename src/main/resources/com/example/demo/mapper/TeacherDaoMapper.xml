@@ -44,4 +44,8 @@
         select count(1) from teacher
         where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%') or idcard like concat('%',#{input},'%')
     </select>
+
+    <delete id="delete" parameterType="Integer">
+        delete from teacher where id = #{id}
+    </delete>
 </mapper>

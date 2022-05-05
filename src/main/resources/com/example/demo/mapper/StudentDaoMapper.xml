@@ -76,4 +76,8 @@
         select count(1) from student
         where realname like concat('%',#{input},'%') or username like concat('%',#{input},'%') or phone like concat('%',#{input},'%')
     </select>
+
+    <delete id="delete" parameterType="Integer">
+        delete from student where id = #{id}
+    </delete>
 </mapper>

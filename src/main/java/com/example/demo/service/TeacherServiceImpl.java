@@ -165,4 +165,9 @@ public class TeacherServiceImpl implements TeacherService{
         PageResult pageResult = new PageResult(pageNum,pageSize,total,teacherList);
         return pageResult;
     }
+
+    @Override
+    public void delete(Integer id) {
+        teacherDao.delete(id);
+    }
 }

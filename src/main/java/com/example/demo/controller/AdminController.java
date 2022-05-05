@@ -94,4 +94,18 @@ public class AdminController {
             return Response.error(e.getMessage());
         }
     }
+
+    /*
+     * 删除管理员
+     * */
+    @ResponseBody
+    @RequestMapping("/delete")
+    public Response delete(Integer id){
+        try{
+            adminService.delete(id);
+            return Response.success("删除成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
 }

@@ -93,4 +93,41 @@ public class ClassServiceImpl implements ClassService{
         TypeNum typeNum = new TypeNum(classes,exam,trail);
         return typeNum;
     }
+
+    @Override
+    public PageResult classManage(JSONObject jsonObject) {
+        Integer page = jsonObject.getInteger("page");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        String input = jsonObject.getString("input");
+        Integer status = jsonObject.getInteger("status");
+        Integer class_type = jsonObject.getInteger("class_type");
+        Integer pageNum = (page - 1) * pageSize;
+
+        List<Class> classList = classDao.classManage(pageNum,pageSize,input,status,class_type);
+        Integer total = classDao.classManageCount(input,status,class_type);
+
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,classList);
+        return pageResult;
+    }
+
+    @Override
+    public PageResult classAudited(JSONObject jsonObject) {
+        Integer page = jsonObject.getInteger("page");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        String input = jsonObject.getString("input");
+        Integer status = jsonObject.getInteger("status");
+        Integer class_type = jsonObject.getInteger("class_type");
+        Integer pageNum = (page - 1) * pageSize;
+
+        List<Class> classList = classDao.classAudited(pageNum,pageSize,input,status,class_type);
+        Integer total = classDao.classAuditedCount(input,status,class_type);
+
+        PageResult pageResult = new PageResult(pageNum,pageSize,total,classList);
+        return pageResult;
+    }
+
+    @Override
+    public void changeStatus(Integer id, Integer status) {
+        classDao.changeStatus(id,status);
+    }
 }

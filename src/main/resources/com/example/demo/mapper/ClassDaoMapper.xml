@@ -48,4 +48,41 @@
         select count(1) from class
         where teacher_id = #{teacher_id} and class_type = #{class_type}
     </select>
+
+    <select id="classManage" resultType="Class">
+        select * from class
+        where status = #{status}
+        <if test="class_type != null">and class_type = #{class_type}</if>
+        <if test="input != null">and class_name like concat('%',#{input},'%')</if>
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="classManageCount" resultType="Integer">
+        select count(1) from class
+        where status = #{status} and class_type = #{class_type} and class_name like concat('%',#{input},'%')
+    </select>
+
+    <update id="changeStatus">
+        update class set status = #{status}
+        where id = #{id}
+    </update>
+
+    <select id="classAudited" resultType="Class">
+        select * from class
+        where
+        <if test="status != null">status = #{status}</if>
+        <if test="status == null">status = 1 or status = 3</if>
+        <if test="class_type != null">and class_type = #{class_type}</if>
+        <if test="input != null">and class_name like concat('%',#{input},'%')</if>
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="classAuditedCount" resultType="Integer">
+        select count(1) from class
+        where
+        <if test="status != null">status = #{status}</if>
+        <if test="status == null">status = 1 or status = 3</if>
+        <if test="class_type != null">and class_type = #{class_type}</if>
+        <if test="input != null">and class_name like concat('%',#{input},'%')</if>
+    </select>
 </mapper>

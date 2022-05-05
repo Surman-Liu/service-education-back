@@ -104,7 +104,7 @@ public class TeacherController {
      * */
     @ResponseBody
     @RequestMapping("/teacher-all")
-    public Response searchStudent(Integer page,Integer pageSize){
+    public Response teacherAll(Integer page,Integer pageSize){
         try{
             PageResult pageResult = teacherService.teacherAll(page,pageSize);
             return Response.success(pageResult,"成功");
@@ -114,7 +114,7 @@ public class TeacherController {
     }
 
     /*
-     * 关键字搜索学生
+     * 关键字搜索老师
      * */
     @ResponseBody
     @RequestMapping("/search")
@@ -122,6 +122,20 @@ public class TeacherController {
         try{
             PageResult pageResult = teacherService.search(jsonObject);
             return Response.success(pageResult,"成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 删除老师
+     * */
+    @ResponseBody
+    @RequestMapping("/delete")
+    public Response delete(Integer id){
+        try{
+            teacherService.delete(id);
+            return Response.success("删除成功");
         }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }

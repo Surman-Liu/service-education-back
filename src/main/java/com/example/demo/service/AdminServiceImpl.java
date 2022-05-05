@@ -99,4 +99,11 @@ public class AdminServiceImpl implements AdminService{
         PageResult pageResult = new PageResult(pageNum,pageSize,total,adminList);
         return pageResult;
     }
+
+    @Override
+    public void delete(Integer id) {
+        adminDao.delete(id);
+    }
+
+
 }
