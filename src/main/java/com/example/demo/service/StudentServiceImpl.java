@@ -88,7 +88,6 @@ public class StudentServiceImpl implements StudentService{
         System.out.println(phone);
         studentDao.editInfo(touxiang,username,words,introduce,phone);
         Student student = studentDao.findByUserPhone(phone);
-        System.out.println(JSONObject.toJSONString(student));
         return student;
     }
 

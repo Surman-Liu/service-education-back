@@ -71,7 +71,7 @@
         select * from class
         where
         <if test="status != null">status = #{status}</if>
-        <if test="status == null">status = 1 or status = 3</if>
+        <if test="status == null">(status = 1 or status = 3)</if>
         <if test="class_type != null">and class_type = #{class_type}</if>
         <if test="input != null">and class_name like concat('%',#{input},'%')</if>
         limit #{pageNum},#{pageSize}
