@@ -18,4 +18,6 @@ public interface AdminDao {
     Integer searchCount(String input);
 
     void delete(Integer id);
+
+    void add(String username, String phone, String passwordSecret);
 }

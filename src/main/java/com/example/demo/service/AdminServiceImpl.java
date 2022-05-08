@@ -105,5 +105,12 @@ public class AdminServiceImpl implements AdminService{
         adminDao.delete(id);
     }
 
-
+    @Override
+    public void add(JSONObject jsonObject) {
+        String username = jsonObject.getString("username");
+        String phone = jsonObject.getString("phone");
+        String password = jsonObject.getString("password");
+        String passwordSecret = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+        adminDao.add(username,phone,passwordSecret);
+    }
 }

@@ -37,4 +37,8 @@
     <delete id="delete" parameterType="Integer">
         delete from admin where id = #{id}
     </delete>
+
+    <insert id="add">
+        insert into admin(username,phone,password) values(#{username},#{phone},#{passwordSecret})
+    </insert>
 </mapper>

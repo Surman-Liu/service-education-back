@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.PageResult;
@@ -104,6 +105,20 @@ public class AdminController {
         try{
             adminService.delete(id);
             return Response.success("删除成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 新增管理员
+     * */
+    @ResponseBody
+    @RequestMapping("/add")
+    public Response add(@RequestBody JSONObject jsonObject){
+        try{
+            adminService.add(jsonObject);
+            return Response.success("添加成功");
         }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }

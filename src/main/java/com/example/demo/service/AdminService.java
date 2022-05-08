@@ -19,4 +19,5 @@ public interface AdminService {
 
     void delete(Integer id);
 
+    void add(JSONObject jsonObject);
 }
