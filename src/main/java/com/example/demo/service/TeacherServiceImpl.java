@@ -1,20 +1,25 @@
 package com.example.demo.service;
 
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.dao.TeacherDao;
 import com.example.demo.dao.UserDao;
-import com.example.demo.entity.PageResult;
-import com.example.demo.entity.Student;
-import com.example.demo.entity.Teacher;
-import com.example.demo.entity.User;
+import com.example.demo.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -169,5 +174,60 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public void delete(Integer id) {
         teacherDao.delete(id);
+    }
+
+    @Override
+    public void export(HttpServletResponse response) throws Exception {
+        List<Teacher> teacherList = teacherDao.export();
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        //自定义标题别名
+        writer.addHeaderAlias("id", "学生ID");
+        writer.addHeaderAlias("realname", "真实姓名");
+        writer.addHeaderAlias("username", "用户昵称");
+        writer.addHeaderAlias("phone", "电话");
+        writer.addHeaderAlias("idcard", "身份证号");
+        writer.addHeaderAlias("touxiang", "头像地址");
+        writer.addHeaderAlias("password", "密码");
+        writer.addHeaderAlias("introduce", "简介");
+        writer.addHeaderAlias("words", "科目");
+        writer.addHeaderAlias("job", "身份");
+        // 一次性写出list内的对象到excel，使用默认样式，强制输出标题
+        writer.write(teacherList, true);
+
+        // 设置浏览器响应的格式
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+        String fileName = URLEncoder.encode("老师名单","UTF-8");
+
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
+
+        ServletOutputStream out = response.getOutputStream();
+        writer.flush(out, true);
+        out.close();
+        writer.close();
+    }
+
+    @Override
+    public void imp(MultipartFile file) throws Exception {
+        InputStream inputStream = file.getInputStream();
+        ExcelReader reader = ExcelUtil.getReader(inputStream);
+        List<List<Object>> list = reader.read(1);
+        for (List<Object> row : list) {
+            Teacher teacher = new Teacher();
+            String username = row.get(0).toString();
+            teacher.setUsername(row.get(0).toString());
+            teacher.setRealname(row.get(1).toString());
+            String phone = row.get(2).toString();
+            teacher.setPhone(row.get(2).toString());
+            String password = row.get(3).toString();
+            String passwordSecret = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+            teacher.setPassword(passwordSecret);
+            teacher.setIdcard(row.get(4).toString());
+            Teacher teacherDB = teacherDao.findByUserPhone(phone);
+            if(!ObjectUtils.isEmpty(teacherDB)){
+                throw new RuntimeException(username + "老师已存在");
+            }
+            teacherDao.save(teacher);
+        }
+
     }
 }

@@ -27,4 +27,6 @@ public interface TeacherDao {
     Integer searchCount(String input);
 
     void delete(Integer id);
+
+    List<Teacher> export();
 }

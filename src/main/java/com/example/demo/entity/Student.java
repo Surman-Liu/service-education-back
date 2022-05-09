@@ -7,9 +7,6 @@ public class Student {
     private String realname;
     private String username;
     private String phone;
-    private String classes;
-    private String exp;
-    private String exam;
     private String touxiang;
     private String introduce;
     private String words;
@@ -28,14 +25,11 @@ public class Student {
         this.phone = phone;
     }
 
-    public Student(Integer id, String realname, String username, String phone, String classes, String exp, String exam, String touxiang, String introduce, String words, String password, Integer job,List<Class> classList) {
+    public Student(Integer id, String realname, String username, String phone, String touxiang, String introduce, String words, String password, Integer job,List<Class> classList) {
         this.id = id;
         this.realname = realname;
         this.username = username;
         this.phone = phone;
-        this.classes = classes;
-        this.exp = exp;
-        this.exam = exam;
         this.touxiang = touxiang;
         this.introduce = introduce;
         this.words = words;
@@ -74,30 +68,6 @@ public class Student {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getClasses() {
-        return classes;
-    }
-
-    public void setClasses(String classes) {
-        this.classes = classes;
-    }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-
-    public String getExam() {
-        return exam;
-    }
-
-    public void setExam(String exam) {
-        this.exam = exam;
     }
 
     public String getTouxiang() {

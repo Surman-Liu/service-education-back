@@ -41,4 +41,8 @@
     <insert id="add">
         insert into admin(username,phone,password) values(#{username},#{phone},#{passwordSecret})
     </insert>
+
+    <select id="export" resultType="Admin">
+        select id,username,phone,password,touxiang from admin
+    </select>
 </mapper>

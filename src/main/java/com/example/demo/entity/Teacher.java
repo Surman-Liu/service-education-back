@@ -8,16 +8,11 @@ public class Teacher {
     private String username;
     private String phone;
     private String idcard;
-    private Integer status;
-    private String classes;
-    private String exp;
-    private String exam;
     private String touxiang;
     private String introduce;
     private String words;
     private String password;
     private Integer job;
-    private List<Class> classList;
 
     public Teacher(){
 
@@ -31,16 +26,12 @@ public class Teacher {
         this.idcard = idcard;
     }
 
-    public Teacher(Integer id, String realname, String username, String phone, String idcard, Integer status, String classes, String exp, String exam, String touxiang, String introduce, String words, String password, Integer job) {
+    public Teacher(Integer id, String realname, String username, String phone, String idcard, String touxiang, String introduce, String words, String password, Integer job) {
         this.id = id;
         this.realname = realname;
         this.username = username;
         this.phone = phone;
         this.idcard = idcard;
-        this.status = status;
-        this.classes = classes;
-        this.exp = exp;
-        this.exam = exam;
         this.touxiang = touxiang;
         this.introduce = introduce;
         this.words = words;
@@ -88,37 +79,6 @@ public class Teacher {
         this.idcard = idcard;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getClasses() {
-        return classes;
-    }
-
-    public void setClasses(String classes) {
-        this.classes = classes;
-    }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-
-    public String getExam() {
-        return exam;
-    }
-
-    public void setExam(String exam) {
-        this.exam = exam;
-    }
 
     public String getTouxiang() {
         return touxiang;
@@ -160,11 +120,4 @@ public class Teacher {
         this.job = job;
     }
 
-    public List<Class> getClassList() {
-        return classList;
-    }
-
-    public void setClassList(List<Class> classList) {
-        this.classList = classList;
-    }
 }

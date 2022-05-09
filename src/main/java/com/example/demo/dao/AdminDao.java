@@ -5,6 +5,7 @@ import com.example.demo.entity.Admin;
 import java.util.List;
 
 public interface AdminDao {
+
     Admin findByUserPhone(String phone);
 
     void updatePassword(String phone, String passwordSecret);
@@ -20,4 +21,7 @@ public interface AdminDao {
     void delete(Integer id);
 
     void add(String username, String phone, String passwordSecret);
+
+    List<Admin> export();
+
 }

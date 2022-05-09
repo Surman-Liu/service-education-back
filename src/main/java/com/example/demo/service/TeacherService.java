@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Teacher;
 import com.example.demo.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public interface TeacherService {
@@ -35,4 +37,8 @@ public interface TeacherService {
     PageResult search(JSONObject jsonObject);
 
     void delete(Integer id);
+
+    void export(HttpServletResponse response) throws Exception;
+
+    void imp(MultipartFile file) throws Exception;
 }

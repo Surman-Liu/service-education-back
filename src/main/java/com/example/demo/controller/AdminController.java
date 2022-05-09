@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.dao.AdminDao;
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.PageResult;
 import com.example.demo.entity.Student;
@@ -12,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -119,6 +127,34 @@ public class AdminController {
         try{
             adminService.add(jsonObject);
             return Response.success("添加成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+    * 导出
+    * */
+    @ResponseBody
+    @RequestMapping("/export")
+    public Response export(HttpServletResponse response) throws Exception{
+        try{
+            adminService.export(response);
+            return Response.success("导出成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+    * 导入
+    * */
+    @ResponseBody
+    @RequestMapping("/import")
+    public Response imp(MultipartFile file) throws Exception {
+        try{
+            adminService.imp(file);
+            return Response.success("导入成功");
         }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }

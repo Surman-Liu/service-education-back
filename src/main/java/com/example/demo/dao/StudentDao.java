@@ -36,4 +36,6 @@ public interface StudentDao {
     Integer searchCount(String input);
 
     void delete(Integer id);
+
+    List<Student> export();
 }

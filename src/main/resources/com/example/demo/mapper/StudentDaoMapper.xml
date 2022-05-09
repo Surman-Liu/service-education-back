@@ -80,4 +80,8 @@
     <delete id="delete" parameterType="Integer">
         delete from student where id = #{id}
     </delete>
+
+    <select id="export" resultType="Student">
+        select id,realname,username,phone,touxiang,introduce,words,password from student
+    </select>
 </mapper>

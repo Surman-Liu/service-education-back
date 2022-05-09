@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -164,6 +166,34 @@ public class StudentController {
         try{
             studentService.delete(id);
             return Response.success("删除成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 导出
+     * */
+    @ResponseBody
+    @RequestMapping("/export")
+    public Response export(HttpServletResponse response) throws Exception{
+        try{
+            studentService.export(response);
+            return Response.success("导出成功");
+        }catch (RuntimeException e){
+            return Response.error(e.getMessage());
+        }
+    }
+
+    /*
+     * 导入
+     * */
+    @ResponseBody
+    @RequestMapping("/import")
+    public Response imp(MultipartFile file) throws Exception {
+        try{
+            studentService.imp(file);
+            return Response.success("导入成功");
         }catch (RuntimeException e){
             return Response.error(e.getMessage());
         }

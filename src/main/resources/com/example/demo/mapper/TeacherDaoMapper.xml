@@ -4,7 +4,7 @@
 <mapper namespace="com.example.demo.dao.TeacherDao">
     <!--    根据用户手机号查询用户-->
     <select id="findByUserPhone" parameterType="String" resultType="Teacher">
-        select id,username,realname,password,job,phone,status,touxiang,introduce,words from `teacher`
+        select id,username,realname,password,job,phone,touxiang,introduce,words from `teacher`
         where phone = #{phone}
     </select>
 
@@ -48,4 +48,8 @@
     <delete id="delete" parameterType="Integer">
         delete from teacher where id = #{id}
     </delete>
+
+    <select id="export" resultType="Teacher">
+        select id,realname,username,phone,idcard,touxiang,introduce,words,password from teacher
+    </select>
 </mapper>
